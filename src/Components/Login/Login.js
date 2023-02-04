@@ -1,10 +1,18 @@
 import React from "react";
 import useFirebase from "../../Hooks/useFirebase";
+import { useLocation, useNavigate} from 'react-router-dom';
 
 
 
 const Login = () => {
    const {user, signInWithGoogle, unRegister} = useFirebase();
+   const navigate = useNavigate();
+   const location = useLocation();
+   const from = location?.state?.from?.pathname || "/";
+
+   if (user) {
+    navigate(from, {replace:true});
+  }
   return (
     <div className="text-center min-h-screen">
       {!user?.uid ? (

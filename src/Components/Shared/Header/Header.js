@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import useFirebase from '../../../Hooks/useFirebase';
 import CustomLink from '../../../utilities/CustomLink';
 import logo from './../../../images/logo.png'
 
 const Header = () => {
-    let [open,setOpen]=useState(false);
+    const [open,setOpen]=useState(false);
+    const {user, unRegister} = useFirebase();
     return (
         <div className='shadow-md w-full fixed top-0 left-0'>
       <div className='shadow-md w-full fixed top-0 left-0'>
@@ -21,7 +23,15 @@ const Header = () => {
             <CustomLink to='/explore'>Explore</CustomLink>
             <CustomLink to='/about'>About</CustomLink>
             <CustomLink to='/bookings'>Bookings</CustomLink>
-            <CustomLink to='/login'>Login</CustomLink>
+            {
+              !user?.uid ?
+              <CustomLink to='/login'>Login</CustomLink>
+              :
+             <span className='text-[blue] md:ml-8 text-xl md:my-0 my-7' ><span><img className='w-6 h-6 rounded-full' src={user?.photoURL} alt="" /></span></span> 
+            }
+            {
+              user?.uid && <span className='text-white ml-2 cursor-pointer' onClick={unRegister}>SignOut</span>
+            }
         </ul>
         </div>
       </div>
