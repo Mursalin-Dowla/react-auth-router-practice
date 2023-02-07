@@ -6,14 +6,14 @@ import auth from '../firebase.init';
 const googleProvider = new GoogleAuthProvider();
 
 const useFirebase = () => {
-    const [user, setUser] = useState({});
+    const [myUser, setMyUser] = useState({});
 
     const signInWithGoogle = ()=>{
      signInWithPopup(auth, googleProvider)
      .then(result=>{
-        const user = result.user;
-        console.log(user);
-        setUser(user);
+        const myUser = result.myUser;
+        console.log(myUser);
+        setMyUser(myUser);
      })
     }
     const unRegister = ()=>{
@@ -26,11 +26,11 @@ const useFirebase = () => {
         })
     }
     useEffect(()=>{
-        onAuthStateChanged(auth, user=>{
-            setUser(user);
+        onAuthStateChanged(auth, myUser=>{
+            setMyUser(myUser);
         })
     },[])
-    return {user, signInWithGoogle, unRegister}
+    return {myUser, signInWithGoogle, unRegister}
 };
 
 export default useFirebase;

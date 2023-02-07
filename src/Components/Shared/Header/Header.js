@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import useFirebase from '../../../Hooks/useFirebase';
 import CustomLink from '../../../utilities/CustomLink';
 import logo from './../../../images/logo.png'
+import userLogo from '../../../images/user.png'
 
 const Header = () => {
     const [open,setOpen]=useState(false);
-    const {user, unRegister} = useFirebase();
+    const {myUser, unRegister} = useFirebase();
     return (
         <div className='shadow-md w-full fixed top-0 left-0'>
       <div className='shadow-md w-full fixed top-0 left-0'>
@@ -24,13 +25,13 @@ const Header = () => {
             <CustomLink to='/about'>About</CustomLink>
             <CustomLink to='/bookings'>Bookings</CustomLink>
             {
-              !user?.uid ?
+              !myUser?.uid ?
               <CustomLink to='/login'>Login</CustomLink>
               :
-             <span className='text-[blue] md:ml-8 text-xl md:my-0 my-7' ><span><img className='w-6 h-6 rounded-full' src={user?.photoURL} alt="" /></span></span> 
+             <span className='text-[blue] md:ml-8 text-xl md:my-0 my-7' ><span><img className='w-6 h-6 rounded-full' src={myUser?.photoURL || userLogo} alt="" /></span></span> 
             }
             {
-              user?.uid && <span className='text-white ml-2 cursor-pointer' onClick={unRegister}>SignOut</span>
+              myUser?.uid && <span className='text-white ml-2 cursor-pointer' onClick={unRegister}>SignOut</span>
             }
         </ul>
         </div>

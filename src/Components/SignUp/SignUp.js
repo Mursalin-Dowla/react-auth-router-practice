@@ -1,12 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from "../../firebase.init";
+
+
 
 const SignUp = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
+
     const handleFormSubmit = (event) =>{
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
+        createUserWithEmailAndPassword(email, password);
+    } 
+    if(user){
+      navigate('/home');
     }
   return (
     <div className="min-h-screen mt-20 text-center">
@@ -28,8 +39,8 @@ const SignUp = () => {
             <input className="border text-lg rounded-md pl-2" type="password" name="password" id="password" placeholder="Password" required/>
           </div>
           <div className="mt-7">
-            <label className="text-right" htmlFor="password">Re-enter Password:</label><br />
-            <input className="border text-lg rounded-md pl-2" type="password" name="password" id="password" placeholder="Re-enter password"  required/>
+            <label className="text-right" htmlFor="re-password">Re-enter Password:</label><br />
+            <input className="border text-lg rounded-md pl-2" type="password" name="re-password" id="re-password" placeholder="Re-enter password"  required/>
           </div>
 
           <input className="mt-5 cursor-pointer bg-blue-800 text-white p-2 rounded-lg" type="submit" value="Register" />
