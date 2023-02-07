@@ -9,7 +9,7 @@ const Book = () => {
             <h1 className='mt-24'>Booking Goes Here</h1>
             <div className='mt-5'>
 
-            <button onClick={()=>navigate('/payment')}>Proceed To Payment</button>
+            <button className='p-2 bg-slate-200 rounded-md hover:bg-slate-300' onClick={()=>navigate('/payment')}>Proceed To Payment</button>
             </div>
         </div>
     );

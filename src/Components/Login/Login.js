@@ -1,6 +1,6 @@
 import React from "react";
 import useFirebase from "../../Hooks/useFirebase";
-import { useLocation, useNavigate} from 'react-router-dom';
+import { useLocation, useNavigate, Link} from 'react-router-dom';
 
 
 
@@ -19,7 +19,7 @@ const Login = () => {
         <div>
           <form className="mt-24">
             <label htmlFor="name">Your Name</label>
-            <input className="border" type="text" name="name" id="name" />
+            <input className="border ml-2" type="text" name="name" id="name" />
           </form>
           <p className="mt-5">or</p>
           <button
@@ -28,6 +28,9 @@ const Login = () => {
           >
             Sign in with Google
           </button>
+          <div className="mt-7">
+        <p>New here? <Link className="text-[blue]" to='/signup'>Sign Up</Link></p>
+      </div>
         </div>
       ) : (
         <div className="mt-24 grid justify-items-center">
@@ -36,6 +39,8 @@ const Login = () => {
             <button className="mt-2 border bg-slate-200 hover:bg-slate-300 font-semibold rounded-md p-2" onClick={unRegister}>Sign Out</button>
         </div>
       )}
+
+      
     </div>
   );
 };
